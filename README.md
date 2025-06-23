@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📊 Chartie
 
-## Getting Started
+Ultra-lightweight canvas-based charting library - Chart.js alternative under 10kb
 
-First, run the development server:
+## ✨ Features
+
+- 🎨 **6 Chart Types**: Bar, Line, Pie, Doughnut, Area, Scatter
+- 🚀 **Lightweight**: Under 10kb bundle size  
+- ⚡ **Performance**: Pure Canvas API, zero dependencies
+- 🎭 **Animations**: Smooth animations with easing functions
+- 📱 **Responsive**: Built-in responsive and retina support
+- 🔧 **TypeScript**: Full TypeScript support
+
+## 🚀 Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install chartie
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📝 Quick Start
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### JavaScript
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```javascript
+import { Chartie } from 'chartie';
 
-## Learn More
+const config = {
+  type: 'bar',
+  data: {
+    labels: ['Jan', 'Feb', 'Mar'],
+    datasets: [{
+      label: 'Sales',
+      data: [12, 19, 3],
+      backgroundColor: '#3b82f6'
+    }]
+  }
+};
 
-To learn more about Next.js, take a look at the following resources:
+const chart = new Chartie('myCanvas', config);
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### React
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```jsx
+import { useEffect, useRef } from 'react';
+import { Chartie } from 'chartie';
 
-## Deploy on Vercel
+function Chart() {
+  const canvasRef = useRef(null);
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  useEffect(() => {
+    const chart = new Chartie(canvasRef.current, {
+      type: 'line',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu'],
+        datasets: [{
+          label: 'Revenue',
+          data: [65, 59, 80, 81],
+          borderColor: '#ef4444',
+          fill: true
+        }]
+      }
+    });
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    return () => chart.destroy();
+  }, []);
+
+  return <canvas ref={canvasRef}></canvas>;
+}
+```
+
+## 📈 Chart Types
+
+- `bar` - Vertical bar chart
+- `line` - Line chart with optional fill
+- `pie` - Pie chart
+- `doughnut` - Doughnut chart  
+- `area` - Area chart (filled line)
+- `scatter` - Scatter plot
+
+## 🤝 Contributing
+
+Contributions are very welcome! We're still at the very beginning and would love your help to make Chartie even better.
+
+- 🐛 Report bugs
+- 💡 Suggest new features
+- 🔧 Submit pull requests
+- 📚 Improve documentation
+
+## 📄 License
+
+MIT License

@@ -1,0 +1,51 @@
+{
+  "name": "chartie",
+  "version": "0.1.2",
+  "description": "Ultra-lightweight canvas-based charting library - Chart.js alternative under 10kb",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "npm run build:types && npm run build:esm && npm run build:cjs && npm run build:umd",
+    "build:esm": "esbuild index.ts --bundle --format=esm --target=es2020 --outfile=dist/index.esm.js",
+    "build:cjs": "esbuild index.ts --bundle --format=cjs --target=node14 --outfile=dist/index.js",
+    "build:umd": "esbuild index.ts --bundle --format=iife --global-name=Chartie --target=es2020 --outfile=dist/chartie.umd.js",
+    "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist",
+    "dev": "tsc --watch",
+    "test": "echo 'Tests will be added'",
+    "size": "bundlesize",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "charts",
+    "canvas",
+    "lightweight",
+    "visualization",
+    "minimal",
+    "typescript"
+  ],
+  "author": "Chartie",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "bundlesize": "^0.18.0",
+    "esbuild": "^0.19.0"
+  },
+  "bundlesize": [
+    {
+      "path": "./dist/index.esm.js",
+      "maxSize": "10kb"
+    }
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  }
+} 
